@@ -14,7 +14,10 @@ const myServer = http.createServer((req , res)=>{
     fs.appendFile('log.txt' , log , (err , data)=>{
 
         switch(myUrl.pathname){
-            case '/' : res.end("Home Page");
+
+            case '/' : 
+
+            if(req.method == 'GET') res.end("Home Page");
             break;
 
             case '/about' : 
@@ -30,6 +33,14 @@ const myServer = http.createServer((req , res)=>{
                 res.end("Here are your result for "+search);
                 break;
 
+            case '/signup':
+
+                if(req.method == 'GET') res.end("This is a signup From");
+                else if(req.method == "POST"){
+                    //DB Query
+                    res.end("Success");
+                }
+                break;
             default:
                 res.end("404 Not Found")
 
